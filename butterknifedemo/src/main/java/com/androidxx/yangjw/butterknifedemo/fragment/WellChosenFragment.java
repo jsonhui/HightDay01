@@ -1,11 +1,8 @@
 package com.androidxx.yangjw.butterknifedemo.fragment;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,22 +35,13 @@ public class WellChosenFragment extends Fragment {
     @BindView(R.id.wellchosen_list)
     ExpandableListView expandableListView;
 
-    private Map<String,List<String>> datas = new HashMap<>();
+    private Map<String, List<String>> datas = new HashMap<>();
     private List<String> groupNameDatas = new ArrayList<>();
     private Context mContext;
     private MyExpadnListAdapter myExpadnListAdapter;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment WellChosenFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static WellChosenFragment newInstance() {
         WellChosenFragment fragment = new WellChosenFragment();
-//        Bundle args = new Bundle();
-//        fragment.setArguments(args);
         return fragment;
     }
 
@@ -66,9 +54,8 @@ public class WellChosenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_well_chosen, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         setupExpandListView();
         return view;
     }
@@ -99,11 +86,14 @@ public class WellChosenFragment extends Fragment {
     }
 
     private void setupDatas() {
+        if (groupNameDatas != null && !groupNameDatas.isEmpty()) {
+            return;
+        }
         for (int i = 0; i < 20; i++) {
             String groupName = "GROUP" + i;
             groupNameDatas.add(groupName);
             ArrayList<String> childListData = new ArrayList<>();
-            datas.put(groupName,childListData);
+            datas.put(groupName, childListData);
             for (int j = 0; j < 10; j++) {
                 childListData.add("CHILD" + j);
             }
@@ -114,6 +104,7 @@ public class WellChosenFragment extends Fragment {
 
         /**
          * 返回分组的数量
+         *
          * @return
          */
         @Override
@@ -123,6 +114,7 @@ public class WellChosenFragment extends Fragment {
 
         /**
          * 返回每一个组中的item的个数
+         *
          * @param groupPosition
          * @return
          */
@@ -160,6 +152,7 @@ public class WellChosenFragment extends Fragment {
 
         /**
          * 创建分组的视图
+         *
          * @param groupPosition
          * @param isExpanded
          * @param convertView
@@ -185,14 +178,16 @@ public class WellChosenFragment extends Fragment {
             TextView mLeftTxt;
             @BindView(R.id.grou_right_tv)
             TextView mRightTxt;
+
             public GroupViewHolder(View view) {
                 view.setTag(this);
-                ButterKnife.bind(this,view);
+                ButterKnife.bind(this, view);
             }
         }
 
         /**
          * 创建分组中的Item的视图
+         *
          * @param groupPosition
          * @param childPosition
          * @param isLastChild
@@ -205,7 +200,7 @@ public class WellChosenFragment extends Fragment {
             View view = convertView;
             ChildViewHolder childViewHolder = null;
             if (view == null) {
-               view = LayoutInflater.from(mContext).inflate(R.layout.child_view, null);
+                view = LayoutInflater.from(mContext).inflate(R.layout.child_view, null);
                 childViewHolder = new ChildViewHolder(view);
             } else {
                 childViewHolder = (ChildViewHolder) view.getTag();
@@ -217,9 +212,10 @@ public class WellChosenFragment extends Fragment {
         class ChildViewHolder {
             @BindView(R.id.child_image)
             ImageView mImageView;
+
             public ChildViewHolder(View view) {
                 view.setTag(this);
-                ButterKnife.bind(this,view);
+                ButterKnife.bind(this, view);
             }
         }
 
