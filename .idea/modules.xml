@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/day01/app.iml" filepath="$PROJECT_DIR$/day01/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/butterknifedemo/butterknifedemo.iml" filepath="$PROJECT_DIR$/butterknifedemo/butterknifedemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/day01/day01.iml" filepath="$PROJECT_DIR$/day01/day01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/httplibrary/httplibrary.iml" filepath="$PROJECT_DIR$/httplibrary/httplibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/liwushuo/liwushuo.iml" filepath="$PROJECT_DIR$/liwushuo/liwushuo.iml" />
       <module fileurl="file://$PROJECT_DIR$/okhttpdemo/okhttpdemo.iml" filepath="$PROJECT_DIR$/okhttpdemo/okhttpdemo.iml" />
     </modules>
