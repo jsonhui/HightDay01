@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/httplibrary" />
             <option value="$PROJECT_DIR$/liwushuo" />
             <option value="$PROJECT_DIR$/okhttpdemo" />
+            <option value="$PROJECT_DIR$/okhttplibrarydemo" />
           </set>
         </option>
         <option name="myModules">
@@ -24,6 +25,7 @@
             <option value="$PROJECT_DIR$/httplibrary" />
             <option value="$PROJECT_DIR$/liwushuo" />
             <option value="$PROJECT_DIR$/okhttpdemo" />
+            <option value="$PROJECT_DIR$/okhttplibrarydemo" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -5,5 +5,5 @@ package com.androidxx.yangjw.httplibrary;
  */
 public interface IOKCallBack {
 
-    public void success(String result);
+    void success(String result);
 }

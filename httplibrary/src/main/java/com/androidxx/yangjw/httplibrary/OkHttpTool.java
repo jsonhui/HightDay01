@@ -16,7 +16,7 @@ import okhttp3.Response;
  */
 public class OkHttpTool {
 
-    private static OkHttpClient okHttpClient ;
+    private static OkHttpClient okHttpClient;
 
     public static OkHttpTask newInstance() {
         if (okHttpClient == null) {
@@ -25,7 +25,7 @@ public class OkHttpTool {
         return new OkHttpTask();
     }
 
-    public static class OkHttpTask extends AsyncTask<String,Integer,String> {
+    public static class OkHttpTask extends AsyncTask<String, Integer, String> {
 
         public static final String URL_REGEX = "((http|ftp|https)://)(([a-zA-Z0-9\\._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\\&%_\\./-~-]*)?";
         private IOKCallBack okCallBack;
@@ -48,13 +48,13 @@ public class OkHttpTool {
             return this;
         }
 
-        public OkHttpTask post(Map<String,String> params) {
+        public OkHttpTask post(Map<String, String> params) {
 
             Set<String> keySet = params.keySet();
             FormBody.Builder builder = new FormBody.Builder();
-            for (String key:keySet) {
+            for (String key : keySet) {
                 String value = params.get(key);
-                builder.add(key,value);
+                builder.add(key, value);
             }
             formBody = builder.build();
             return this;
