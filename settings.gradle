@@ -1,1 +1,2 @@
-include ':day01', ':liwushuo', ':okhttpdemo', 'butterknifedemo',"httplibrary","okhttplibrarydemo"
+//include ':day01', ':liwushuo', ':okhttpdemo', ':recycleviewdemo', 'butterknifedemo', "httplibrary", "okhttplibrarydemo"
+include ':liwushuo',"httplibrary","pulltorefreshlibrary"

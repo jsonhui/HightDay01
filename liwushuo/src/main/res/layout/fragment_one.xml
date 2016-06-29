@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,14 +25,12 @@
                 android:layout_centerVertical="true"
                 android:src="@mipmap/btn_signin" />
 
-            <TextView
-                android:id="@+id/one_fragment_text"
+            <ImageView
+                android:id="@+id/one_fragment_title_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="礼物说"
-                android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:src="@mipmap/logo_title" />
 
             <ImageView
                 android:id="@+id/one_fragment_iv_two"
@@ -40,15 +39,42 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:src="@mipmap/abc_ic_search" />
+                android:src="@mipmap/ic_menu_search" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
-    <TextView
+    <ImageView
+        android:id="@+id/one_fragment_tab_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/one_fragment_toolbar"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:src="@mipmap/arrow_index_down" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/one_fragment_tab"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/one_fragment_toolbar"
+        android:layout_toLeftOf="@+id/one_fragment_tab_iv"
+        android:padding="2dp"
+        app:tabIndicatorColor="@color/red"
+        app:tabIndicatorHeight="2dp"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextColor="@color/black" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/one_fragment_vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/one_fragment_toolbar"
-        android:gravity="center"
-        android:text="one" />
+        android:layout_below="@+id/one_fragment_tab" />
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_below="@+id/one_fragment_toolbar"-->
+    <!--android:gravity="center"-->
+    <!--android:text="one" />-->
 
 </RelativeLayout>

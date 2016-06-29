@@ -9,23 +9,17 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/butterknifedemo" />
-            <option value="$PROJECT_DIR$/day01" />
             <option value="$PROJECT_DIR$/httplibrary" />
             <option value="$PROJECT_DIR$/liwushuo" />
-            <option value="$PROJECT_DIR$/okhttpdemo" />
-            <option value="$PROJECT_DIR$/okhttplibrarydemo" />
+            <option value="$PROJECT_DIR$/pulltorefreshlibrary" />
           </set>
         </option>
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/butterknifedemo" />
-            <option value="$PROJECT_DIR$/day01" />
             <option value="$PROJECT_DIR$/httplibrary" />
             <option value="$PROJECT_DIR$/liwushuo" />
-            <option value="$PROJECT_DIR$/okhttpdemo" />
-            <option value="$PROJECT_DIR$/okhttplibrarydemo" />
+            <option value="$PROJECT_DIR$/pulltorefreshlibrary" />
           </set>
         </option>
       </GradleProjectSettings>

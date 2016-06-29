@@ -1,44 +1,37 @@
 package com.yuanke.liwushuo.frg;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.androidxx.yangjw.httplibrary.IOKCallBack;
+import com.androidxx.yangjw.httplibrary.OkHttpTool;
+import com.google.gson.Gson;
 import com.yuanke.liwushuo.R;
+import com.yuanke.liwushuo.adapter.MyViewPagerAdapter;
+import com.yuanke.liwushuo.bean.TabNames;
+import com.yuanke.liwushuo.constant.Constant;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link OneFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link OneFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class OneFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-
-    private OnFragmentInteractionListener mListener;
+    private ViewPager mViewPager;
+    private TabLayout mTabLayout;
+    private List<Fragment> fragments = new ArrayList<>();
+    private List<TabNames.DataBean.ChannelsBean> mChannelsBeen = new ArrayList<>();
+    private List<String> mTitleDatas = new ArrayList<>();
+    private MyViewPagerAdapter mViewPagerAdapter;
 
     public OneFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment OneFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static OneFragment newInstance() {
         OneFragment fragment = new OneFragment();
         Bundle args = new Bundle();
@@ -47,53 +40,44 @@ public class OneFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_one, container, false);
+        View view = inflater.inflate(R.layout.fragment_one, null);
+        mTabLayout = (TabLayout) view.findViewById(R.id.one_fragment_tab);
+        mViewPager = (ViewPager) view.findViewById(R.id.one_fragment_vp);
+        //2、创建适配器
+        mViewPagerAdapter = new MyViewPagerAdapter(getFragmentManager(), fragments, mTitleDatas);
+        //3、关联适配器
+        mViewPager.setAdapter(mViewPagerAdapter);
+        //TabLayout初始化
+        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        //mTabLayout.setPadding(20, 0, 20, 0);
+        mTabLayout.setupWithViewPager(mViewPager);
+        //数据
+        OkHttpTool.newInstance().start(Constant.TAB_NAMES).callback(new IOKCallBack() {
+            @Override
+            public void success(String result) {
+                Gson gson = new Gson();
+                TabNames tabNames = gson.fromJson(result, TabNames.class);
+                mChannelsBeen = tabNames.getData().getChannels();
+                if (fragments.size() != 0 && mTitleDatas.size() != 0) {
+                    return;
+                }
+                for (int i = 0; i < mChannelsBeen.size(); i++) {
+                    if (i == 0) {
+                        fragments.add(WellChosenFragment.newInstance());
+                    } else {
+                        Log.i("TAG+++", mChannelsBeen.get(i).getId() + "");
+                        fragments.add(OtherFragment.newInstance(mChannelsBeen.get(i).getId()));
+                    }
+                    mTitleDatas.add(mChannelsBeen.get(i).getName());
+                }
+                Log.i("TAG+++", "fragments的长度:" + fragments.size() + "");
+                mViewPagerAdapter.notifyDataSetChanged();
+            }
+        });
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }
