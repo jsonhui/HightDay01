@@ -9,6 +9,8 @@ import java.io.Closeable;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * 网络请求工具类
@@ -16,6 +18,15 @@ import java.net.URL;
  * @author arvin
  */
 public class HttpUtils {
+    //字符串转化时间
+    public static String toData(long time) {
+        Date dat = new Date(time * 1000);
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(dat);
+        java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("MM-dd");
+        String sb = format.format(gc.getTime());
+        return sb;
+    }
 
     private static final String TAG = "HttpUtils";
 

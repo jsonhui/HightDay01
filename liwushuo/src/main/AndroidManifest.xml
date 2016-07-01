@@ -10,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/MyTheme">
         <activity android:name=".act.GuideActivity"></activity>
-        <activity android:name=".act.HomeActivity">
+        <activity
+            android:name=".act.HomeActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

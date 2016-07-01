@@ -65,7 +65,7 @@ public class OneFragment extends Fragment {
                 }
                 for (int i = 0; i < mChannelsBeen.size(); i++) {
                     if (i == 0) {
-                        fragments.add(WellChosenFragment.newInstance());
+                        fragments.add(OneIndexFragment.newInstance(mChannelsBeen.get(i).getId()));
                     } else {
                         Log.i("TAG+++", mChannelsBeen.get(i).getId() + "");
                         fragments.add(OtherFragment.newInstance(mChannelsBeen.get(i).getId()));

@@ -9,4 +9,6 @@ public class Constant {
     public static final String LIST_DATA_FRONT = "http://api.liwushuo.com/v2/channels/";
     public static final String LIST_DATA_BEHIND = "/items_v2?gender=1&limit=20&generation=2&offset=";
     public static final String BANNER = "http://api.liwushuo.com/v2/banners";
+    public static final String CYCLE = "http://api.liwushuo.com/v2/secondary_banners?gender=1&generation=1";
+
 }

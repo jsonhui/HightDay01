@@ -70,7 +70,7 @@
 
     <TextView
         android:id="@+id/other_list_item_tv_four"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/other_list_item_iv"
         android:layout_margin="10dp"
