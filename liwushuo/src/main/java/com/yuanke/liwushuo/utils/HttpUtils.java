@@ -18,12 +18,22 @@ import java.util.GregorianCalendar;
  * @author arvin
  */
 public class HttpUtils {
-    //字符串转化时间
+    //字符串转化时间  月-日-星期
     public static String toData(long time) {
         Date dat = new Date(time * 1000);
         GregorianCalendar gc = new GregorianCalendar();
         gc.setTime(dat);
-        java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("MM-dd");
+        java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("MM月dd日 E");
+        String sb = format.format(gc.getTime());
+        return sb;
+    }
+
+    //字符串转化时间  时间
+    public static String toTime(long time) {
+        Date dat = new Date(time * 1000);
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(dat);
+        java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("HH:mm");
         String sb = format.format(gc.getTime());
         return sb;
     }

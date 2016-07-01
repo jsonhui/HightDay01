@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:padding="10dp">
+    android:padding="5dp">
 
     <TextView
         android:layout_width="30dp"
@@ -16,10 +16,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:focusable="true"
         android:gravity="center"
-        android:text="数据正在加载..."
+        android:text="数据正在加载"
         android:textColor="@color/black"
         android:textSize="12sp" />
 
@@ -29,4 +30,14 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/index_list_item_tv"
         android:background="@drawable/index_item_line" />
+
+    <TextView
+        android:id="@+id/index_list_item_tv_below"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/index_list_item_tv"
+        android:layout_centerHorizontal="true"
+        android:text="数据正在加载"
+        android:textColor="@color/red"
+        android:textSize="8sp" />
 </RelativeLayout>

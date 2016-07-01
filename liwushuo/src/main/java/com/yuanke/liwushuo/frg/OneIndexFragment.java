@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.androidxx.yangjw.httplibrary.IOKCallBack;
 import com.androidxx.yangjw.httplibrary.OkHttpTool;
@@ -53,6 +55,7 @@ public class OneIndexFragment extends Fragment {
     private List<Object> info = new ArrayList<>();
     private List<ListData.DataBean.ItemsBean> list = new ArrayList<>();
     private int pager = 0;
+    private int[] dots = new int[]{R.drawable.btn_check_disabled_nightmode, R.drawable.btn_check_normal};
 
     public static OneIndexFragment newInstance(int flag) {
         Bundle args = new Bundle();
@@ -75,6 +78,12 @@ public class OneIndexFragment extends Fragment {
         flag = (int) getArguments().getSerializable("flag");
         //视图
         pullListView = (PullToRefreshListView) view.findViewById(R.id.wellchosen_list);
+        /****添加为空的进度***/
+        ProgressBar progressBar = new ProgressBar(getActivity());
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        progressBar.setLayoutParams(params);
+        pullListView.setEmptyView(progressBar);
+        /****添加为空的进度***/
         //加头视图
         addHeaderView();
         //创建适配器
@@ -82,7 +91,7 @@ public class OneIndexFragment extends Fragment {
         //关联适配器
         pullListView.setAdapter(myListAdapter);
         //数据
-        initData(Constant.LIST_DATA_FRONT + flag + Constant.LIST_DATA_BEHIND + 0 * 20);
+        initData();
         pullListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -112,7 +121,35 @@ public class OneIndexFragment extends Fragment {
         pullListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                initData(Constant.LIST_DATA_FRONT + flag + Constant.LIST_DATA_BEHIND + 0 * 20);
+                pager = 0;
+                String path = Constant.LIST_DATA_FRONT + flag + Constant.LIST_DATA_BEHIND + pager * 20;
+                HttpUtil.requestGet(path, new IRequestCallBack() {
+                    @Override
+                    public void onSuccess(String result) {
+                        Gson gson = new Gson();
+                        ListData listData = gson.fromJson(result, ListData.class);
+                        list = listData.getData().getItems();
+                        long time = list.get(0).getCreated_at();
+                        String data = HttpUtils.toData(time);
+                        info.clear();
+                        info.add(data);
+                        for (int i = 0; i < list.size(); i++) {
+                            ListData.DataBean.ItemsBean listBean = list.get(i);
+                            //判断是否一个日期
+                            String dataTemp = HttpUtils.toData(listBean.getCreated_at());
+                            if (data.equals(dataTemp)) {
+                                info.add(listBean);
+                            } else {
+                                time = listBean.getCreated_at();
+                                data = HttpUtils.toData(time);
+                                info.add(data);
+                                info.add(listBean);
+                            }
+                        }
+                        myListAdapter.notifyDataSetChanged();
+                        pullListView.onRefreshComplete();
+                    }
+                });
             }
 
             @Override
@@ -172,7 +209,6 @@ public class OneIndexFragment extends Fragment {
         headerViewHolder = new HeaderViewHolder(headerView);
         setupHeaderRecyclerView(headerViewHolder);
         loadBannerDatas();//动态加载数据
-        setupBanner(headerViewHolder);
         pullListView.getRefreshableView().addHeaderView(headerView);
     }
 
@@ -183,8 +219,11 @@ public class OneIndexFragment extends Fragment {
             public void success(String result) {
                 Gson gson = new Gson();
                 Banners bannerInfo = gson.fromJson(result, Banners.class);
-                imageDatas.addAll(bannerInfo.getData().getBanners());
-                headerViewHolder.convenientBanner.getViewPager().getAdapter().notifyDataSetChanged();
+                if (imageDatas.size() == 0) {
+                    imageDatas.addAll(bannerInfo.getData().getBanners());
+                    // headerViewHolder.convenientBanner.getViewPager().getAdapter().notifyDataSetChanged();
+                }
+                setupBanner(headerViewHolder);
             }
         });
     }
@@ -197,9 +236,11 @@ public class OneIndexFragment extends Fragment {
                 return new HeaderBannerViewHolder();
             }
         }, imageDatas);
+        headerViewHolder.convenientBanner.setPageIndicator(dots);
 //                .setPageIndicator(new int[]{R.drawable.btn_check_disabled_nightmode, R.drawable.btn_check_normal})
 //                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_LEFT);
     }
+
 
     class HeaderBannerViewHolder implements Holder<Banners.DataBean.BannersBean> {
         ImageView imageView;
@@ -212,8 +253,17 @@ public class OneIndexFragment extends Fragment {
         }
 
         @Override
-        public void UpdateUI(Context context, int position, Banners.DataBean.BannersBean data) {
+        public void UpdateUI(Context context, int position, final Banners.DataBean.BannersBean data) {
             Picasso.with(mContext).load(data.getImage_url()).into(imageView);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Intent intent = new Intent(getContext(), WebActivity.class);
+//                    intent.putExtra("url", data.getWebp_url());
+//                    startActivity(intent);
+                    Toast.makeText(mContext, "你点了一下", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
@@ -233,14 +283,15 @@ public class OneIndexFragment extends Fragment {
                 ReCycleData data = gson.fromJson(result, ReCycleData.class);
                 List<ReCycleData.DataBean.SecondaryBannersBean> been = data.getData().getSecondary_banners();
                 headerViewAdapter.getData().clear();
-                headerViewAdapter.getData().addAll(been);
-                headerViewAdapter.notifyDataSetChanged();
+                if (headerViewAdapter.getData().size() == 0) {
+                    headerViewAdapter.getData().addAll(been);
+                    headerViewAdapter.notifyDataSetChanged();
+                }
             }
         });
     }
 
     class HeaderViewHolder {
-
         @BindView(R.id.header_view_rv)
         RecyclerView mRecyclerView;
         @BindView(R.id.header_view_cb)
@@ -277,6 +328,7 @@ public class OneIndexFragment extends Fragment {
                 //这里的链接待处理
                 @Override
                 public void onClick(View v) {
+                    Toast.makeText(mContext, "你点了", Toast.LENGTH_SHORT).show();
 //                    Intent intent = new Intent(getContext(), WebActivity.class);
 //                    intent.putExtra("url", been.get(flag).getImage_url());
 //                    startActivity(intent);
@@ -287,7 +339,6 @@ public class OneIndexFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(HeaderRViewHolder holder, int position) {
-            //flag = position;
             Picasso.with(getContext()).load(been.get(position).getImage_url()).into(holder.imageView);
         }
 
@@ -303,8 +354,8 @@ public class OneIndexFragment extends Fragment {
 
 
     //准备数据
-    private void initData(String url) {
-        String path = url;
+    private void initData() {
+        String path = Constant.LIST_DATA_FRONT + flag + Constant.LIST_DATA_BEHIND + 0 * 20;
         HttpUtil.requestGet(path, new IRequestCallBack() {
             @Override
             public void onSuccess(String result) {
@@ -329,7 +380,6 @@ public class OneIndexFragment extends Fragment {
                     }
                 }
                 myListAdapter.notifyDataSetChanged();
-                pullListView.onRefreshComplete();
             }
         });
     }

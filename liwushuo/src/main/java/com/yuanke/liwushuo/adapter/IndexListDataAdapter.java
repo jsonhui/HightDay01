@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.yuanke.liwushuo.R;
 import com.yuanke.liwushuo.bean.ListData;
+import com.yuanke.liwushuo.utils.HttpUtils;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ import java.util.List;
 public class IndexListDataAdapter extends AbsBaseAdapter<Object> {
     private static final int TYPE_TWO = 0;
     private static final int TYPE_ONE = 1;
+
 
     public IndexListDataAdapter(Context context, List<Object> data) {
         super(context, data);
@@ -34,20 +36,27 @@ public class IndexListDataAdapter extends AbsBaseAdapter<Object> {
                 ViewHolderOne holderOne;
                 if (convertView == null) {
                     holderOne = new ViewHolderOne();
-                    convertView = inflater.inflate(R.layout.index_list_item_one,null);
+                    convertView = inflater.inflate(R.layout.index_list_item_one, parent, false);
                     holderOne.tvOne = (TextView) convertView.findViewById(R.id.index_list_item_tv);
+                    holderOne.tvBelow = (TextView) convertView.findViewById(R.id.index_list_item_tv_below);
                     convertView.setTag(holderOne);
                 } else {
                     holderOne = (ViewHolderOne) convertView.getTag();
                 }
                 String data = getData().get(position).toString();
                 holderOne.tvOne.setText(data);
+                if (position == 0) {
+                    String time = HttpUtils.toTime((long) ((ListData.DataBean.ItemsBean) getData().get(2)).getUpdated_at());
+                    holderOne.tvBelow.setText("更新于" + time);
+                } else {
+                    holderOne.tvBelow.setVisibility(View.INVISIBLE);
+                }
                 break;
             case TYPE_TWO:
                 ViewHolderTwo holderTwo;
                 if (convertView == null) {
                     holderTwo = new ViewHolderTwo();
-                    convertView = inflater.inflate(R.layout.other_list_item, null);
+                    convertView = inflater.inflate(R.layout.other_list_item, parent, false);
                     holderTwo.tv1 = (TextView) convertView.findViewById(R.id.other_list_item_tv_one);
                     holderTwo.tv2 = (TextView) convertView.findViewById(R.id.other_list_item_tv_two);
                     holderTwo.tv3 = (TextView) convertView.findViewById(R.id.other_list_item_tv_three);
@@ -91,7 +100,7 @@ public class IndexListDataAdapter extends AbsBaseAdapter<Object> {
     }
 
     static class ViewHolderOne {
-        TextView tvOne;
+        TextView tvOne, tvBelow;
     }
 
     static class ViewHolderTwo {
