@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioGroup;
 
 import com.yuanke.liwushuo.R;
+import com.yuanke.liwushuo.constant.Constant;
 import com.yuanke.liwushuo.frg.FourFragment;
 import com.yuanke.liwushuo.frg.OneFragment;
 import com.yuanke.liwushuo.frg.ThreeFragment;
@@ -69,7 +70,7 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case R.id.home_rg_two:
                         if (twoFragment == null) {
-                            twoFragment = TwoFragment.newInstance();
+                            twoFragment = TwoFragment.newInstance(Constant.HOT);
                             transaction.add(R.id.home_fl, twoFragment, "two");
                             if (oneFragment != null) {
                                 transaction.hide(oneFragment);

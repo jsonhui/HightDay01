@@ -22,6 +22,7 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.squareup.picasso.Picasso;
@@ -84,6 +85,20 @@ public class OneIndexFragment extends Fragment {
         progressBar.setLayoutParams(params);
         pullListView.setEmptyView(progressBar);
         /****添加为空的进度***/
+        //设置上拉下拉模式(允许)
+        pullListView.setMode(PullToRefreshBase.Mode.BOTH);
+        /**设置下拉上拉样式**/
+        ILoadingLayout startProxy = pullListView.getLoadingLayoutProxy(true, false);
+        startProxy.setPullLabel("");
+        startProxy.setRefreshingLabel("");
+        startProxy.setReleaseLabel("");
+        startProxy.setLoadingDrawable(this.getResources().getDrawable(R.drawable.flip_head));
+        ILoadingLayout endProxy = pullListView.getLoadingLayoutProxy(false, true);
+        endProxy.setPullLabel("");
+        endProxy.setRefreshingLabel("");
+        endProxy.setReleaseLabel("");
+        endProxy.setLoadingDrawable(this.getResources().getDrawable(R.drawable.default_ptr_rotate));
+        /**设置下拉上拉样式**/
         //加头视图
         addHeaderView();
         //创建适配器
@@ -117,7 +132,7 @@ public class OneIndexFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        pullListView.setMode(PullToRefreshBase.Mode.BOTH);
+
         pullListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {

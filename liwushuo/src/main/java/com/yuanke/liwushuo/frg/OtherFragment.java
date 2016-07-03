@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import com.androidxx.yangjw.httplibrary.IOKCallBack;
 import com.androidxx.yangjw.httplibrary.OkHttpTool;
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.yuanke.liwushuo.R;
@@ -65,6 +66,18 @@ public class OtherFragment extends Fragment {
         mListView.setAdapter(adapter);
         //如果要使用上拉
         mListView.setMode(PullToRefreshBase.Mode.BOTH);
+        /**设置下拉上拉样式**/
+        ILoadingLayout startProxy = mListView.getLoadingLayoutProxy(true, false);
+        startProxy.setPullLabel("");
+        startProxy.setRefreshingLabel("");
+        startProxy.setReleaseLabel("");
+        startProxy.setLoadingDrawable(this.getResources().getDrawable(R.drawable.flip_head));
+        ILoadingLayout endProxy = mListView.getLoadingLayoutProxy(false, true);
+        endProxy.setPullLabel("");
+        endProxy.setRefreshingLabel("");
+        endProxy.setReleaseLabel("");
+        endProxy.setLoadingDrawable(this.getResources().getDrawable(R.drawable.default_ptr_rotate));
+        /**设置下拉上拉样式**/
         //数据
         Log.i("TAG---+", Constant.LIST_DATA_FRONT + flag + Constant.LIST_DATA_BEHIND);
         OkHttpTool.newInstance()

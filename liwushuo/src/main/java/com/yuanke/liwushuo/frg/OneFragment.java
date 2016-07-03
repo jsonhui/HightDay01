@@ -42,7 +42,7 @@ public class OneFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_one, null);
+        View view = inflater.inflate(R.layout.fragment_one, container,false);
         mTabLayout = (TabLayout) view.findViewById(R.id.one_fragment_tab);
         mViewPager = (ViewPager) view.findViewById(R.id.one_fragment_vp);
         //2、创建适配器

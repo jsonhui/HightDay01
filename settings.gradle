@@ -1,2 +1,2 @@
 //include ':day01', ':liwushuo', ':okhttpdemo', ':recycleviewdemo', 'butterknifedemo', "httplibrary", "okhttplibrarydemo"
-include ':liwushuo',"httplibrary","pulltorefreshlibrary"
+include ':liwushuo',"httplibrary","pulltorefreshlibrary","alter_animation"

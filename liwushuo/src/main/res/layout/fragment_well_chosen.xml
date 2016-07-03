@@ -9,7 +9,7 @@
         android:id="@+id/wellchosen_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        ptr:ptrAnimationStyle="flip"
+        ptr:ptrAnimationStyle="rotate"
         ptr:ptrDrawable="@drawable/default_ptr_flip"
         ptr:ptrHeaderBackground="@android:color/transparent"
         ptr:ptrHeaderTextColor="#ff0000" />

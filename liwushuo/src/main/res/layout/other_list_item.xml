@@ -45,8 +45,8 @@
         android:layout_height="20dp"
         android:layout_alignBottom="@+id/other_list_item_tv_two"
         android:layout_toLeftOf="@+id/other_list_item_tv_three"
-        app:civ_border_color="@color/green"
-        app:civ_border_width="0dp" />
+        app:civ_border_color="@color/gray"
+        app:civ_border_width="1dip" />
     <!--<com.makeramen.roundedimageview.RoundedImageView -->
     <!--android:id="@+id/other_list_item_circle_image"-->
     <!--android:layout_width="20dp"-->
