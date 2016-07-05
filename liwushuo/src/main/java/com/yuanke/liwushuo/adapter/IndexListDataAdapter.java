@@ -46,8 +46,8 @@ public class IndexListDataAdapter extends AbsBaseAdapter<Object> {
                 String data = getData().get(position).toString();
                 holderOne.tvOne.setText(data);
                 if (position == 0) {
-                    String time = HttpUtils.toTime((long) ((ListData.DataBean.ItemsBean) getData().get(2)).getUpdated_at());
-                    holderOne.tvBelow.setText("更新于" + time);
+                    String time = HttpUtils.toTime((long) ((ListData.DataBean.ItemsBean) getData().get(0)).getUpdated_at());
+                    holderOne.tvBelow.setText("下次更新" + time);
                 } else {
                     holderOne.tvBelow.setVisibility(View.INVISIBLE);
                 }
