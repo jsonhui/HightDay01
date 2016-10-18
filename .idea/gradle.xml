@@ -5,25 +5,23 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="F:\ProgramFiles\android-studio\gradle\gradle-2.10" />
+        <option name="gradleHome" value="C:\Program Files\Android\Android Studio\gradle\gradle-2.14.1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/JPushExample" />
+            <option value="$PROJECT_DIR$/PushDemo" />
+            <option value="$PROJECT_DIR$/Pushlib" />
             <option value="$PROJECT_DIR$/alter_animation" />
+            <option value="$PROJECT_DIR$/convenientbanner" />
             <option value="$PROJECT_DIR$/httplibrary" />
-            <option value="$PROJECT_DIR$/liwushuo" />
+            <option value="$PROJECT_DIR$/kuaidu" />
             <option value="$PROJECT_DIR$/pulltorefreshlibrary" />
+            <option value="$PROJECT_DIR$/recycleviewdemo" />
+            <option value="$PROJECT_DIR$/testone" />
           </set>
         </option>
-        <option name="myModules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/alter_animation" />
-            <option value="$PROJECT_DIR$/httplibrary" />
-            <option value="$PROJECT_DIR$/liwushuo" />
-            <option value="$PROJECT_DIR$/pulltorefreshlibrary" />
-          </set>
-        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

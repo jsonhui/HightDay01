@@ -3,11 +3,16 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HightDay01.iml" filepath="$PROJECT_DIR$/HightDay01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JPushExample/JPushExample.iml" filepath="$PROJECT_DIR$/JPushExample/JPushExample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PushDemo/PushDemo.iml" filepath="$PROJECT_DIR$/PushDemo/PushDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Pushlib/Pushlib.iml" filepath="$PROJECT_DIR$/Pushlib/Pushlib.iml" />
       <module fileurl="file://$PROJECT_DIR$/alter_animation/alter_animation.iml" filepath="$PROJECT_DIR$/alter_animation/alter_animation.iml" />
-      <module fileurl="file://$PROJECT_DIR$/day01/app.iml" filepath="$PROJECT_DIR$/day01/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/convenientbanner/convenientbanner.iml" filepath="$PROJECT_DIR$/convenientbanner/convenientbanner.iml" />
       <module fileurl="file://$PROJECT_DIR$/httplibrary/httplibrary.iml" filepath="$PROJECT_DIR$/httplibrary/httplibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/liwushuo/liwushuo.iml" filepath="$PROJECT_DIR$/liwushuo/liwushuo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kuaidu/kuaidu.iml" filepath="$PROJECT_DIR$/kuaidu/kuaidu.iml" />
       <module fileurl="file://$PROJECT_DIR$/pulltorefreshlibrary/pulltorefreshlibrary.iml" filepath="$PROJECT_DIR$/pulltorefreshlibrary/pulltorefreshlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recycleviewdemo/recycleviewdemo.iml" filepath="$PROJECT_DIR$/recycleviewdemo/recycleviewdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testone/testone.iml" filepath="$PROJECT_DIR$/testone/testone.iml" />
     </modules>
   </component>
 </project>

@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\JPushExample\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\tiledstripes.xml",
+        "source": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\JPushExample\\res\\drawable-hdpi\\tiledstripes.xml"
+    },
+    {
+        "merged": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\JPushExample\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\richpush_btn_selector.xml",
+        "source": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\JPushExample\\res\\drawable-hdpi\\richpush_btn_selector.xml"
+    },
+    {
+        "merged": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\JPushExample\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\corners_bg.xml",
+        "source": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\JPushExample\\res\\drawable-hdpi\\corners_bg.xml"
+    }
+]

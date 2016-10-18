@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\PushDemo\\build\\intermediates\\res\\merged\\debug\\layout\\localnotification_item.xml",
+        "source": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\PushDemo\\res\\layout\\localnotification_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\PushDemo\\build\\intermediates\\res\\merged\\debug\\layout\\activity_add_localnotification.xml",
+        "source": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\PushDemo\\res\\layout\\activity_add_localnotification.xml"
+    },
+    {
+        "merged": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\PushDemo\\build\\intermediates\\res\\merged\\debug\\layout\\activity_localnotification.xml",
+        "source": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\PushDemo\\res\\layout\\activity_localnotification.xml"
+    },
+    {
+        "merged": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\PushDemo\\build\\intermediates\\res\\merged\\debug\\layout\\activity_test.xml",
+        "source": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\PushDemo\\res\\layout\\activity_test.xml"
+    },
+    {
+        "merged": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\PushDemo\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
+        "source": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\PushDemo\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\PushDemo\\build\\intermediates\\res\\merged\\debug\\layout\\notification_view.xml",
+        "source": "C:\\Users\\x240\\AndroidStudioProjects\\HightDay01\\PushDemo\\res\\layout\\notification_view.xml"
+    }
+]
