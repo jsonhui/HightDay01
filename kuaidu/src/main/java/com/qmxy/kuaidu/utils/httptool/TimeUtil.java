@@ -18,6 +18,13 @@ public class TimeUtil {
         return sb;
     }
 
+    public static String transferLong(String millSec) {
+        long time = Long.parseLong(millSec);
+        Date date = new Date(time);
+        SimpleDateFormat sd = new SimpleDateFormat("HH:mm");
+        return sd.format(date);
+    }
+
     public static String transferLongToDate(String millSec) {
         long time = Long.parseLong(millSec);
         Date date = new Date(time);

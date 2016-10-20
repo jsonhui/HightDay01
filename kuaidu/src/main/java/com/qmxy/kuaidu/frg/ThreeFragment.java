@@ -20,15 +20,18 @@ import android.widget.Toast;
 import com.qmxy.kuaidu.R;
 import com.qmxy.kuaidu.act.AboutActivity;
 import com.qmxy.kuaidu.act.YjActivity;
+import com.qmxy.kuaidu.bean.User;
 import com.qmxy.kuaidu.utils.commontool.HttpUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.smssdk.EventHandler;
-import cn.smssdk.SMSSDK;
-import cn.smssdk.gui.RegisterPage;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.tencent.qq.QQ;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -49,7 +52,8 @@ public class ThreeFragment extends Fragment {
     TextView cache;
     @BindView(R.id.yh_text)
     TextView yhText;
-    public ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
+    private String openId;
 
     public static ThreeFragment newInstance(String path) {
 
@@ -68,6 +72,10 @@ public class ThreeFragment extends Fragment {
                              final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_three, container, false);
         ButterKnife.bind(this, view);
+        ShareSDK.initSDK(getContext());
+        final User user = new User();
+        final Platform qq = ShareSDK.getPlatform(QQ.NAME);
+        qq.removeAccount(true);
         final SharedPreferences preferences = getContext().getSharedPreferences("phone", Activity.MODE_PRIVATE);
         final SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("flag", 2);
@@ -79,47 +87,56 @@ public class ThreeFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String path = (String) getArguments().getSerializable("path");
         circle_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (preferences.getInt("flag", 1) == 1) {
                     Toast.makeText(getContext(), "你已经登录！", Toast.LENGTH_SHORT).show();
                     return;
-                } else {
-                    SMSSDK.initSDK(getContext(), "15b8133bc624b", "070f0241fb8b83fa2bb2bb4e1aa4c6d8");
-                    //打开注册页面
-                    RegisterPage registerPage = new RegisterPage();
-                    registerPage.setRegisterCallback(new EventHandler() {
-                        public void afterEvent(int event, int result, Object data) {
-                            // 解析注册结果
-                            if (result == SMSSDK.RESULT_COMPLETE) {
-                                @SuppressWarnings("unchecked")
-                                HashMap<String, Object> phoneMap = (HashMap<String, Object>) data;
-                                //String country = (String) phoneMap.get("country");
-                                String phone = (String) phoneMap.get("phone");
-                                editor.putInt("flag", 1);
-                                editor.putString("phone", phone);
-                                //提交当前数据
-                                editor.commit();
-                                yhText.setText(preferences.getString("phone", "登录"));
-                                // 提交用户信息（此方法可以不调用）
-                                //registerUser(country, phone);
-                            }
-                        }
-                    });
-                    registerPage.show(getContext());
                 }
+                qq.SSOSetting(false);//设置false表示使用SSO授权方式
+                qq.showUser(null);//请求数据
+                //qq.authorize();
             }
         });
+        qq.setPlatformActionListener(new PlatformActionListener() {
+            @Override
+            public void onComplete(Platform platform, int i, final HashMap<String, Object> hashMap) {
+                user.setUserName((String) hashMap.get("nickname"));
+                user.setImage((String) hashMap.get("figureurl_qq_2"));
+                editor.putInt("flag", 1);
+                //提交当前数据
+                editor.commit();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        yhText.setText(user.getUserName());
+                        Picasso.with(getContext()).load(user.getImage()).into(circle_image);
+                        Toast.makeText(getContext(), "登录成功！", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
 
+            @Override
+            public void onError(Platform platform, int i, Throwable throwable) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(), "登录失败！", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
 
-//        circle_image.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getContext(), LoginActivity.class));
-//            }
-//        });
+            @Override
+            public void onCancel(Platform platform, int i) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(), "登录取消！", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
         /**cache的监听**/
         layoutThree.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,14 +191,6 @@ public class ThreeFragment extends Fragment {
                         .show();
             }
         });
-//        layoutSix.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                editor.putInt("flag", 2);
-//                editor.commit();
-//                yhText.setText("登录");
-//            }
-//        });
         layoutFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -195,6 +204,8 @@ public class ThreeFragment extends Fragment {
                     Toast.makeText(getContext(), "你还没有登录过！", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                //移除授权
+                qq.removeAccount(true);
                 new AlertDialog.Builder(getContext())
                         .setMessage("你确定要退出吗？")
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -220,6 +231,7 @@ public class ThreeFragment extends Fragment {
                                                 public void run() {
                                                     progressDialog.dismiss();
                                                     yhText.setText("登录");
+                                                    circle_image.setImageResource(R.drawable.me_miter_default_image_night);
                                                 }
                                             });
                                         } catch (InterruptedException e) {
@@ -227,38 +239,6 @@ public class ThreeFragment extends Fragment {
                                         }
                                     }
                                 }).start();
-//                                new AsyncTask<Void, Integer, String>() {
-//                                    @Override
-//                                    protected void onPreExecute() {
-//                                        super.onPreExecute();
-//                                        progressDialog = ProgressDialog.show(getContext(), "", "正在清除...");
-//                                        //LogTool.log(getClass(), progressDialog.toString());
-//                                    }
-//
-//                                    @Override
-//                                    protected String doInBackground(Void... params) {
-//                                        /**清除缓存**/
-//                                        try {
-//                                            Thread.sleep(3000);
-//                                            HttpUtils.clearAllCache(getContext());
-//                                            String cacheSize = HttpUtils.getTotalCacheSize(getContext());
-//                                            return cacheSize;
-//                                        } catch (Exception e) {
-//                                            e.printStackTrace();
-//                                        }
-//                                        return "";
-//                                    }
-//
-//                                    @Override
-//                                    protected void onPostExecute(String temp) {
-//                                        progressDialog.dismiss();
-//                                        if (!"".equals(temp)) {
-//                                            cache.setText("当前缓存大小为" + temp);
-//                                        } else {
-//                                            cache.setText("当前缓存大小为" + "???");
-//                                        }
-//                                    }
-//                                }.execute();
                             }
                         })
                         .show();

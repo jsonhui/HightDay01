@@ -23,6 +23,7 @@
         android:layout_below="@+id/yj_button"
         android:layout_margin="10dp"
         android:background="@drawable/edit_tj"
+        android:cursorVisible="false"
         android:gravity="top"
         android:hint="提交意见字数控制在500字以下！"
         android:lines="6" />

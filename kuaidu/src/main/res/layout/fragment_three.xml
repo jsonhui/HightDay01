@@ -2,15 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/burlywood"
     tools:context="com.qmxy.kuaidu.frg.ThreeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:id="@+id/rl_me"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:layout_alignParentTop="true"
-        android:background="@drawable/me_top_bg">
+        android:background="@color/brown">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circle_image_one"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/circle_image_one"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -36,6 +36,7 @@
                 android:id="@+id/yh_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:text="登录"
                 android:textColor="@color/white" />
         </LinearLayout>
@@ -107,11 +108,20 @@
             android:text="0M" />
     </LinearLayout>
 
+    <View
+        android:id="@+id/line_one"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/ll_me_three"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#646e6a6a" />
+
     <LinearLayout
         android:id="@+id/ll_me_four"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_below="@+id/ll_me_three"
+        android:layout_below="@+id/line_one"
         android:layout_margin="5dp"
         android:paddingLeft="10dp">
 
@@ -126,6 +136,15 @@
             android:gravity="center"
             android:text="意见" />
     </LinearLayout>
+
+    <View
+        android:id="@+id/line_two"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/ll_me_four"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#646e6a6a" />
 
     <LinearLayout
         android:id="@+id/ll_me_five"
@@ -146,6 +165,15 @@
             android:text="关于" />
     </LinearLayout>
 
+    <View
+        android:id="@+id/line_three"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/ll_me_five"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#646e6a6a" />
+
     <LinearLayout
         android:id="@+id/ll_me_six"
         android:layout_width="match_parent"
@@ -164,4 +192,13 @@
             android:gravity="center"
             android:text="退出" />
     </LinearLayout>
+
+    <View
+        android:id="@+id/line_four"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/ll_me_six"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#646e6a6a" />
 </RelativeLayout>

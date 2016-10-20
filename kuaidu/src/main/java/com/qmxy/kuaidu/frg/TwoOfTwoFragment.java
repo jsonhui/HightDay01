@@ -16,10 +16,18 @@ public class TwoOfTwoFragment extends Fragment {
     public TwoOfTwoFragment() {
     }
 
+    public static TwoOfTwoFragment newInstance() {
+        Bundle args = new Bundle();
+        TwoOfTwoFragment fragment = new TwoOfTwoFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_two_of_two, container, false);
+        View view = inflater.inflate(R.layout.fragment_two_of_two, container, false);
+        return view;
     }
 
 }

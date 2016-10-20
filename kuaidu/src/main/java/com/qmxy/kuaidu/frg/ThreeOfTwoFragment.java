@@ -13,18 +13,22 @@ import com.qmxy.kuaidu.R;
  * A simple {@link Fragment} subclass.
  */
 public class ThreeOfTwoFragment extends Fragment {
-
-
     public ThreeOfTwoFragment() {
-        // Required empty public constructor
     }
 
+    public static ThreeOfTwoFragment newInstance() {
+        Bundle args = new Bundle();
+        ThreeOfTwoFragment fragment = new ThreeOfTwoFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_three_of_two, container, false);
+        View view = inflater.inflate(R.layout.fragment_three_of_two, container, false);
+
+        return view;
     }
 
 }
