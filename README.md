@@ -1,2 +1,4 @@
 #快读
-！image(https://github.com/jsonhui/images/blob/master/1.png)
+##图片1\<br>
+![image](https://github.com/jsonhui/images/blob/master/1.png)\<br>
+                   
