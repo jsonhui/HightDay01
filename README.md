@@ -1,4 +1,4 @@
-# <div class="text" align=center background=#005430>快读</div>
+#<div class="text" align=center >快读</div>
 <br>
 ```java
                     这个项目是在武汉知五方科技完成的，现在分享出来，技术可以联系320175912@qq.com
